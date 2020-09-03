@@ -4,7 +4,7 @@ const Events = require("./src/bot.js");
 
 const client = new Discord.Client();
 
-const prefix = "!";
+const prefix = config.PREFIX;
 
 client.on("message", function(message) {
 	if (message.author.bot) return;
