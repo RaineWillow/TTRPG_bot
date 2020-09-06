@@ -6,6 +6,7 @@ const client = new Discord.Client();
 
 const prefix = config.PREFIX;
 
+//watches for a message, upon recieving one it will run the command in question
 client.on("message", function(message) {
 	if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
