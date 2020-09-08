@@ -39,6 +39,7 @@ function deleteBattlemap(args, message) {
 	}
 }
 
+//a command to create an entity
 function createEntity(args, message) {
 	let result = manager.checkGame(message.guild.id);
 	if (!result.success) {
@@ -49,6 +50,7 @@ function createEntity(args, message) {
 	}
 }
 
+//a command to delete an entity
 function deleteEntity(args, message) {
 	let result = manager.checkGame(message.guild.id);
 	if (!result.success) {
@@ -69,7 +71,7 @@ function dev(args, message) {
 		let gList = manager.getGames();
 		let outString = "";
 		Object.keys(gList).forEach(key => {
-			outString += key + " " + gList[key].name + "\n";
+			outString += key + ":\n" + gList[key].name + ",\n" + gList[key].owner + "\n\n";
 		});
 		if (outString === "") {
 			return "No games!";
@@ -86,6 +88,8 @@ function ping(args, message) {
 module.exports = {
 
 	'newgame': {invoke: newGame, minArgs: 2},
+
+	//'loadgame':{invoke: loadGame, minArgs: X},
 
 	'unbind': {invoke:unbind, minArgs: 0},
 
