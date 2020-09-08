@@ -61,6 +61,66 @@ function deleteEntity(args, message) {
 	}
 }
 
+function createMacro(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].checkEntity(args[0]);
+		if (!result2.success) {
+			return result.message;
+		} else {
+			let result3 = manager.games[message.guild.id].ents[args[0]].createMacro(args[1], args[2]);
+			return result3.message;
+		}
+	}
+}
+
+function deleteMacro(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].checkEntity(args[0]);
+		if (!result2.success) {
+			return result.message;
+		} else {
+			let result3 = manager.games[message.guild.id].ents[args[0]].deleteMacro(args[1]);
+			return result3.message;
+		}
+	}
+}
+
+function editMacro(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].checkEntity(args[0]);
+		if (!result2.success) {
+			return result.message;
+		} else {
+			let result3 = manager.games[message.guild.id].ents[args[0]].editMacro(args[1], args[2]);
+			return result3.message;
+		}
+	}
+}
+
+function viewMacro(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].checkEntity(args[0]);
+		if (!result2.success) {
+			return result.message;
+		} else {
+			let result3 = manager.games[message.guild.id].ents[args[0]].viewMacro(args[1]);
+			return result3.message;
+		}
+	}
+}
+
 //new Functions added here
 
 
@@ -100,6 +160,14 @@ module.exports = {
 	'createentity': {invoke: createEntity, minArgs: 1},
 
 	'deleteentity': {invoke: deleteEntity, minArgs: 1},
+
+	'createmacro': {invoke: createMacro, minArgs: 3},
+
+	'deletemacro': {invoke: deleteMacro, minArgs: 2},
+
+	'editmacro': {invoke: editMacro, minArgs: 3},
+
+	'viewmacro': {invoke: viewMacro, minArgs: 2},
 
 	//new functions added here!
 

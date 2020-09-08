@@ -51,6 +51,22 @@ class Game {
 			return new result.UserResult(true, `Entity ${name} deleted!`);
 		}
 	}
+
+	checkBattlemap(name, message) {
+		if (name in this.battlemaps) {
+			return new result.UserResult(true, `${name} is in this game!`);
+		} else {
+			return new result.UserResult(false, `${name} is not in this game!`);
+		}
+	}
+
+	checkEntity(name, message) {
+		if (name in this.ents) {
+			return new result.UserResult(true, `${name} is in this game!`);
+		} else {
+			return new result.UserResult(false, `${name} is not in this game!`);
+		}
+	}
 }
 
 module.exports = {
