@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 let manager = require("./game_manager.js");
 
 //tells the manager to create a game and bind the Discord server to it
-function newgame(args, message) {
+function newGame(args, message) {
 	let result = manager.createGame(message.guild.id, message.author.id, args[1], args[0]);
 	return result.message;
 }
@@ -17,6 +17,7 @@ function unbind(args, message) {
 	return result.message;
 }
 
+//adds a battlemap to the game in question
 function createBattlemap(args, message) {
 	let result = manager.checkGame(message.guild.id);
 	if (!result.success) {
@@ -27,12 +28,33 @@ function createBattlemap(args, message) {
 	}
 }
 
+//removes a battlemap from the game
 function deleteBattlemap(args, message) {
 	let result = manager.checkGame(message.guild.id);
 	if (!result.success) {
 		return result.message;
 	} else {
 		let result2 = manager.games[message.guild.id].deleteBattlemap(args[0], message);
+		return result2.message;
+	}
+}
+
+function createEntity(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].createEntity(args[0], message);
+		return result2.message;
+	}
+}
+
+function deleteEntity(args, message) {
+	let result = manager.checkGame(message.guild.id);
+	if (!result.success) {
+		return result.message;
+	} else {
+		let result2 = manager.games[message.guild.id].deleteEntity(args[0], message);
 		return result2.message;
 	}
 }
@@ -63,13 +85,17 @@ function ping(args, message) {
 
 module.exports = {
 
-	'newgame': {invoke: newgame, minArgs: 2},
+	'newgame': {invoke: newGame, minArgs: 2},
 
 	'unbind': {invoke:unbind, minArgs: 0},
 
 	'createbattlemap': {invoke:createBattlemap, minArgs: 1},
 
 	'deletebattlemap': {invoke: deleteBattlemap, minArgs: 1},
+
+	'createentity': {invoke: createEntity, minArgs: 1},
+
+	'deleteentity': {invoke: deleteEntity, minArgs: 1},
 
 	//new functions added here!
 

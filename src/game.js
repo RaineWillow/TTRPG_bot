@@ -10,6 +10,8 @@ class Game {
 		this.owner = owner;
 
 		this.battlemaps = {};
+
+		this.ents = {};
 	}
 
 	createBattlemap(name, message) {
@@ -24,10 +26,29 @@ class Game {
 
 	deleteBattlemap(name, message) {
 		if (!(name in this.battlemaps)) {
-			return new result.UserResult(false, `There is no battlemap with name ${name} in the server!`);
+			return new result.UserResult(false, `There is no battlemap with name ${name} in this game!`);
 		} else {
 			delete this.battlemaps[name];
 			return new result.UserResult(true, `Battlemap ${name} deleted!`);
+		}
+	}
+
+	createEntity(name, message) {
+		if (name in this.ents) {
+			return new result.UserResult(false, `There is already an entity with name ${name} in this game!`);
+		} else {
+			this.ents = Object.assign(this.ents, {[name]: new ents.Entity(name)});
+			console.log(this.ents);
+			return new result.UserResult(true, `The entity ${name} was created successfully!`);
+		}
+	}
+
+	deleteEntity(name, message) {
+		if (!(name in this.ents)) {
+			return new result.UserResult(false, `There is no entity with name ${name} in this game!`);
+		} else {
+			delete this.ents[name];
+			return new result.UserResult(true, `Entity ${name} deleted!`);
 		}
 	}
 }
