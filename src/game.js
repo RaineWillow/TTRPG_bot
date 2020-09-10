@@ -2,10 +2,11 @@ let result = require("./utils/error.js");
 
 let maps = require("./battlemap/battlemap.js");
 let ents = require("./ents/entity.js");
+const battlemap = require("./battlemap/battlemap.js");
 
 class Game {
 	constructor(id, name, owner) {
-		this.id = id;
+		this._id = id;
 		this.name = name;
 		this.owner = owner;
 
@@ -66,6 +67,17 @@ class Game {
 		} else {
 			return new result.UserResult(false, `${name} is not in this game!`);
 		}
+	}
+
+	static fromDocument(obj) {
+		let game = new Game(obj._id, obj.name, obj.owner);
+		for (let key in obj.battlemaps) {
+			Object.assign(game.battlemaps, {[key]: maps.Battlemap.fromDocument(obj.battlemaps[key])});
+		}
+		for (let key in obj.ents) {
+			Object.assign(game.ents, {[key]: ents.Entity.fromDocument(obj.ents[key])});
+		}
+		return game;
 	}
 }
 

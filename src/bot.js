@@ -2,18 +2,19 @@ const Discord = require("discord.js");
 let manager = require("./game_manager.js");
 
 //tells the manager to create a game and bind the Discord server to it
-function newGame(args, message) {
-	let result = manager.createGame(message.guild.id, message.author.id, args[1], args[0]);
+async function newGame(args, message) {
+	let result = manager.createGame(message.guild.id, message.author.id, args[0]);
 	return result.message;
 }
 
-//function load(args, message) {
-
-//}
+async function loadGame(args, message) {
+	let result = await manager.loadGame(message.guild.id, message.author.id, args[0]);
+	return result.message;
+}
 
 //tells the manager to unbind the Discord server from the game
-function unbind(args, message) {
-	let result = manager.unbind(message.guild.id);
+async function unbind(args, message) {
+	let result = await manager.unbind(message.guild.id);
 	return result.message;
 }
 
@@ -147,9 +148,9 @@ function ping(args, message) {
 
 module.exports = {
 
-	'newgame': {invoke: newGame, minArgs: 2},
+	'newgame': {invoke: newGame, minArgs: 1},
 
-	//'loadgame':{invoke: loadGame, minArgs: X},
+	'loadgame':{invoke: loadGame, minArgs: 1},
 
 	'unbind': {invoke:unbind, minArgs: 0},
 

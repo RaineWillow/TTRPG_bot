@@ -18,6 +18,7 @@
   "homepage": "https://github.com/RaineWillow/TTRPG_bot#readme",
   "dependencies": {
     "canvas": "^2.6.1",
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.3.1",
+    "mongodb": "^3.6.1"
   }
 }

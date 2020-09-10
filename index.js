@@ -7,7 +7,7 @@ const client = new Discord.Client();
 const prefix = config.PREFIX;
 
 //watches for a message, upon recieving one it will run the command in question
-client.on("message", function(message) {
+client.on("message", async function(message) {
 	if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
 
@@ -18,7 +18,7 @@ client.on("message", function(message) {
 
 	if (command in Events) {
 		if (args.length >= Events[command].minArgs) {
-			message.channel.send(Events[command].invoke(args, message));
+			message.channel.send(await Events[command].invoke(args, message));
 		} else {
 			message.channel.send(`Inproper format of command!`);
 		}

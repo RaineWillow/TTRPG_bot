@@ -1,4 +1,8 @@
 {
-    "BOT_TOKEN": "token goes here",
-    "PREFIX": "$"
+	"BOT_TOKEN": "token goes here",
+	"PREFIX": "$",
+	"MONGODB": {
+		"SERVER": "mongodb://localhost:27017/",
+		"NAME": "ttrpg"
+	}
 }

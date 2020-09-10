@@ -41,6 +41,14 @@ class Entity {
 			return new result.UserResult(true, `Macro ${name} successfully changed to ${this.macros[name].macro}!`);
 		}
 	}
+
+	static fromDocument(obj) {
+		let entity = new Entity(obj.name);
+		for (let key in obj.macros) {
+			Object.assign(entity.macros, {[key]: macros.Macro.fromDocument(obj.macros[key])});
+		}
+		return entity;
+	}
 }
 
 module.exports = {

@@ -6,6 +6,10 @@ class Macro {
 	edit(macro) {
 		this.macro = macro;
 	}
+
+	static fromDocument(obj) {
+		return new Macro(obj.macro);
+	}
 }
 
 module.exports = {
