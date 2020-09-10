@@ -4,7 +4,7 @@ const config = require("../data.json");
 const { MongoClient } = require("mongodb");
 
 class GameManager {
-	constructor(dbConfig) {
+	constructor() {
 		this.games = {};
 		this._active = [];
 		this._gamesCollectionPromise = this.initDatabase(config.MONGODB);
