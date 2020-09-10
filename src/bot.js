@@ -3,7 +3,7 @@ let manager = require("./game_manager.js");
 
 //tells the manager to create a game and bind the Discord server to it
 async function newGame(args, message) {
-	let result = manager.createGame(message.guild.id, message.author.id, args[0]);
+	let result = await manager.createGame(message.guild.id, message.author.id, args[0]);
 	return result.message;
 }
 
